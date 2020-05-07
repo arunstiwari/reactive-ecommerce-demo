@@ -57,3 +57,7 @@ kubectl -f shippingservice.yaml
 	}
 }
 ```
+### 8. Now once you have tested it, don't forgt to delete the cluster using the following command
+```bash
+gcloud container clusters delete ecommerce-app
+```
