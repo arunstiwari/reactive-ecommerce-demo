@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myredis
+spec:
+  selector:
+    app: myredis
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myredis
+spec:
+  selector:
+    matchLabels:
+      app: myredis
+  template:
+    metadata:
+      labels:
+        app: myredis
+    spec:
+      containers:
+        - name: myredis
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: storage
+              mountPath: /data
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: redis-pvc
