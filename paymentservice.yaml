@@ -31,9 +31,9 @@ spec:
             - containerPort: 4000
           env:
             - name: REDIS_HOST
-              value: myredis
+              value: "myredis"
             - name: REDIS_PORT
-              value: 6379
+              value: "6379"
             - name: PAYMENT_SERVICE_PORT
-              value: 4000
+              value: "4000"
           imagePullPolicy: Always
