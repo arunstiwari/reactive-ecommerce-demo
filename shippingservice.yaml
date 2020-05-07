@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: shipping-service
-          image: learnk8sgcr.io/kuberenetes-01-basic/shipping-service
+          image: gcr.io/kuberenetes-01-basic/shipping-service
           ports:
             - containerPort: 5000
           env:
