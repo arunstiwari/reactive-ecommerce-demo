@@ -10,10 +10,10 @@ spec:
       targetPort: 3100
   type: LoadBalancer
 ---
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: order-service
+  name: ecommerce-app
 spec:
   replicas: 1
   selector:
@@ -26,14 +26,14 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: learnk8sgcr.io/kuberenetes-01-basic/order-service
+          image: gcr.io/kuberenetes-01-basic/order-service
           ports:
             - containerPort: 3100
           env:
             - name: REDIS_HOST
-              value: myredis
+              value: "myredis"
             - name: REDIS_PORT
-              value: 6379
+              value: "6379"
             - name: ORDER_SERVICE_PORT
-              value: 3100
+              value: "3100"
           imagePullPolicy: Always
