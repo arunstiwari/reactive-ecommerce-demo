@@ -1,4 +1,6 @@
 const express = require('express');
+require('dotenv').config();
+
 const subscriber = require('./shipping/subscriber');
 
 const app = express();

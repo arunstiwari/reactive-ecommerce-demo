@@ -1,8 +1,10 @@
 const express = require('express');
 const orderRouter = require('./order');
+require('dotenv').config();
 
 const app = express();
 
+console.log('---process ---',process.env);
 app.use(express.json());
 
 const {orderSubscriber} = require('./subscriber');

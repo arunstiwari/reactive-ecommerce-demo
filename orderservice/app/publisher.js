@@ -1,7 +1,7 @@
 const redis = require('redis');
 
 const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
-const REDIS_PORT = proces.env.REDIS_PORT || 6379;
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
 
 const REDIS_OPTIONS = {
     host: REDIS_HOST,

@@ -4,7 +4,7 @@ const OrderValidatorService = require('./order/order.validator');
 
 const orderValidatorService = new OrderValidatorService();
 const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
-const REDIS_PORT = proces.env.REDIS_PORT || 6379;
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
 
 const REDIS_OPTIONS = {
     host: REDIS_HOST,

@@ -1,8 +1,9 @@
 const redis = require('redis');
 const ShippingService = require('./shipping.service');
-
+const {REDIS_OPTIONS} = require('./publisher');
 const shippingService = new ShippingService();
-const subscriber = redis.createClient();
+
+const subscriber = redis.createClient(REDIS_OPTIONS);
 
 subscriber.on('message', (channel, confirmedOrder) => {
     const order = JSON.parse(confirmedOrder);

@@ -1,7 +1,8 @@
 const redis = require('redis');
 const PaymentService = require('./payment.service');
+const {REDIS_OPTIONS}  = require('./publisher');
 
-const subscriber = redis.createClient();
+const subscriber = redis.createClient(REDIS_OPTIONS);
 
 const paymentService = new PaymentService();
 
