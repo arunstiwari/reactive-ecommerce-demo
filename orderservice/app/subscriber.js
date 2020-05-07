@@ -3,10 +3,18 @@ const {orderPublisher} = require('./publisher');
 const OrderValidatorService = require('./order/order.validator');
 
 const orderValidatorService = new OrderValidatorService();
+const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
+const REDIS_PORT = proces.env.REDIS_PORT || 6379;
 
-const orderSubscriber = redis.createClient();
-const paymentConfirmedSubscriber = redis.createClient();
-const orderDispatchedSubscriber = redis.createClient();
+const REDIS_OPTIONS = {
+    host: REDIS_HOST,
+    port: REDIS_PORT
+}
+
+const orderSubscriber = redis.createClient(REDIS_OPTIONS);
+
+const paymentConfirmedSubscriber = redis.createClient(REDIS_OPTIONS);
+const orderDispatchedSubscriber = redis.createClient(REDIS_OPTIONS);
 
 orderSubscriber.on('message', (channel, orderRequested) => {
     console.log('1.OrderRequested : '+orderRequested);
