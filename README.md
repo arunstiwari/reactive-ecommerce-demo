@@ -27,7 +27,16 @@ gcloud builds submit --tag gcr.io/kuberenetes-01-basic/shipping-service .
 
 ```
 
-### 5. Now all the docker images are pushed to google container repository. Now we can deploy the redis first
+### 5. Create react app docker image
+```bash
+cd ./ecommerce-app
+
+gcloud builds submit --tag gcr.io/kuberenetes-01-basic/ecommerce-react-app .
+
+```
+
+
+### 6. Now all the docker images are pushed to google container repository. Now we can deploy the redis first
 ```bash
 kubectl -f redis.yaml
 
@@ -39,7 +48,7 @@ kubectl get deployments
 kubectl get services
 ```
 
-### 6. Now do the deployments of orderservice, paymentservice and shipping service
+### 7. Now do the deployments of orderservice, paymentservice and shipping service
 ```bash
 kubectl -f orderservice.yaml
 
@@ -48,7 +57,7 @@ kubectl -f paymentservice.yaml
 kubectl -f shippingservice.yaml
 ```
 
-### 7. Now once the service is running, open the postman http://<external_ip_order_service>/orders/initiated and use the POST. In the body add the following json 
+### 8. Now once the service is running, open the postman http://<external_ip_order_service>/orders/initiated and use the POST. In the body add the following json 
 ```json
 {
 	"order": {
@@ -57,7 +66,13 @@ kubectl -f shippingservice.yaml
 	}
 }
 ```
-### 8. Now once you have tested it, don't forgt to delete the cluster using the following command
+
+### 9. Deploy react application 
+```bash
+kubectl apply -f reactapp.yaml
+```
+
+### 10. Now once you have tested it, don't forgt to delete the cluster using the following command
 ```bash
 gcloud container clusters delete ecommerce-app
 ```

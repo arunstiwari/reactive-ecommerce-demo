@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-service
+spec:
+  selector:
+    app: ecommerce-service
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-react-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommerce-react-app
+  template:
+    metadata:
+      labels:
+        app: ecommerce-react-app
+    spec:
+      containers:
+        - name: ecommerce-react-app
+          image: gcr.io/kuberenetes-01-basic/ecommerce-react-app
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
