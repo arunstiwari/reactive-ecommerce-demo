@@ -1,0 +1,50 @@
+version: "3"
+services:
+  mongo:
+    image: "mongo:latest"
+    ports: 
+      - "27017:27017"
+  redis:
+    image: "redis:latest"
+  orderservice:
+    ports: 
+      - "3100:3100"
+    build:
+      dockerfile: Dockerfile
+      context: ./orderservice/
+    environment: 
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MONGO_DB_NAME=ecommerce
+      - MONGO_PORT=27017
+      - MONGO_HOST=mongo
+      - ORDER_SERVICE_PORT=3100
+  paymentservice:
+    ports: 
+        - "4000:4000"
+    build:
+        dockerfile: Dockerfile
+        context: ./paymentservice/
+    environment: 
+        - REDIS_HOST=redis
+        - REDIS_PORT=6379
+        - MONGO_DB_NAME=ecommerce
+        - MONGO_PORT=27017
+        - MONGO_HOST=mongo
+        - PAYMENT_SERVICE_PORT=4000
+  shippingservice:
+    ports: 
+        - "5000:5000"
+    build:
+        dockerfile: Dockerfile
+        context: ./shippingservice/
+    environment: 
+        - REDIS_HOST=redis
+        - REDIS_PORT=6379
+        - MONGO_DB_NAME=ecommerce
+        - MONGO_PORT=27017
+        - MONGO_HOST=mongo
+        - SHIPPING_SERVICE_PORT=5000       
+    links:
+      - mongo
+      - redis  
