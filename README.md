@@ -29,7 +29,7 @@ gcloud builds submit --tag gcr.io/kuberenetes-01-basic/shipping-service .
 
 ### 5. Now all the docker images are pushed to google container repository. Now we can deploy the redis first
 ```bash
-kubectl -f redis.yaml
+kubectl create -f redis.yaml
 
 ```
 Verify deployments using 
@@ -41,11 +41,11 @@ kubectl get services
 
 ### 6. Now do the deployments of orderservice, paymentservice and shipping service
 ```bash
-kubectl -f orderservice.yaml
+kubectl create -f orderservice.yaml
 
-kubectl -f paymentservice.yaml
+kubectl create -f paymentservice.yaml
 
-kubectl -f shippingservice.yaml
+kubectl create -f shippingservice.yaml
 ```
 
 ### 7. Now once the service is running, open the postman http://<external_ip_order_service>/orders/initiated and use the POST. In the body add the following json 
